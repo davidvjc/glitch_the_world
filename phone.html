@@ -1,0 +1,42 @@
+
+
+
+<!doctype html>
+  <head>
+    <title>Screens</title>
+    <style>
+      
+    </style>
+
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+  </head>
+  <body>
+
+<div id="content"></div>
+
+<script>
+
+var master_phone_message;
+var phone_output;
+
+  //initialise the socket connection
+  var socket = io();
+
+    //get instructions from the master
+    socket.on('master data phone action', function(msgb){
+        //create a variable for the message
+        master_phone_message = msgb;
+        console.log("the master said: " + master_phone_message);   
+        document.getElementById('content').innerHTML = master_phone_message;
+  });
+
+
+//send out any phone data to anywhere
+// socket.emit('phone data in', phone_output);
+// console.log("the phone is sending out: " + phone_output);
+
+
+</script>
+  </body>
+</html>
