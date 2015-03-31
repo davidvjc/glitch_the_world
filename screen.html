@@ -1,0 +1,39 @@
+
+
+
+<!doctype html>
+  <head>
+    <title>Screens</title>
+    <style>
+      
+    </style>
+
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+
+  </head>
+  <body>
+<div id="content"></div>
+
+
+<script>
+
+var master_message;
+
+  //initialise the socket connection
+  var socket = io();
+
+    //receive instructions from the master control
+    socket.on('master data screen action', function(msg){
+        //create a variable for the message
+        master_message = msg;
+        console.log(master_message);
+        document.getElementById('content').innerHTML = master_message;
+
+	});
+
+
+
+</script>
+  </body>
+</html>
