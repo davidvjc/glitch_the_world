@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Master Control</title>
+    <style>
+     #controls {
+     	padding: 20px;
+     }
+     #scenes {
+     	margin: auto;
+     }
+    </style>
+    <script src="/socket.io/socket.io.js"></script>
+
+  </head>
+  <body>
+    
+
+    <div id="controls">
+
+<div id="scenes">
+
+<button id="cinematic">Scene 1 - Cinematic</button><br><br>
+
+<button id="interactive_a">Scene 2a - Interactive - Accel</button><br><br>
+<button id="interactive_b">Scene 2b - Interactive - Game</button><br><br>
+<button id="interactive_c">Scene 2c - Interactive - Choice</button><br><br>
+
+<button id="mixed">Scene 3 - Mixed</button><br><br>
+<button id="phone">Scene 4 - Phone only</button><br><br>
+<button id="three">Scene 5 - 3 Screen</button><br><br>
+
+
+
+</div>
+
+
+    </div>
+
+<script language="Javascript">
+
+var phone_shall;
+var screen_shall;
+
+  //initialise the socket connection
+  var socket = io();
+
+  document.getElementById("cinematic").addEventListener("click", cinematic);
+
+function cinematic() {
+            //screen command
+            var s_msg = "<video autoplay><source src='test.mp4' type='video/mp4'></video>";
+            //emit the message 
+            socket.emit('master data screen', s_msg);
+
+            //phone command
+            var p_msg = "be empty";
+            //emit the message 
+            socket.emit('master data phone', p_msg);
+}  
+
+  document.getElementById("interactive_a").addEventListener("click", ia);
+
+function ia() {
+            //screen command
+            var s_msg = "be interactive";
+            //emit the message 
+            socket.emit('master data screen', s_msg);
+
+            //phone command
+            var p_msg = "lets use the Accel";
+            //emit the message 
+            socket.emit('master data phone', p_msg);
+}  
+
+  document.getElementById("phone").addEventListener("click", justPhone);
+
+function justPhone() {
+            //screen command
+            var s_msg = "nothing here";
+            //emit the message 
+            socket.emit('master data screen', s_msg);
+
+            //phone command
+            var p_msg = "<audio autoplay><source src='test.mp3' type='audio/mp3'></audio>";
+            //emit the message 
+            socket.emit('master data phone', p_msg);
+}  
+
+
+
+
+</script>
+
+  </body>
+</html>
